@@ -1,9 +1,9 @@
 package system
 
 import (
-	v1 "github.com/flipped-aurora/gin-vue-admin/server/api/v1"
-	"github.com/flipped-aurora/gin-vue-admin/server/middleware"
 	"github.com/gin-gonic/gin"
+	v1 "github.com/lish96/gin-vue-admin/server/api/v1"
+	"github.com/lish96/gin-vue-admin/server/middleware"
 )
 
 type AuthorityRouter struct{}

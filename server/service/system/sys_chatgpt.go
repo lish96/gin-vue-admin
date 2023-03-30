@@ -5,10 +5,10 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/flipped-aurora/gin-vue-admin/server/global"
-	"github.com/flipped-aurora/gin-vue-admin/server/model/system"
-	"github.com/flipped-aurora/gin-vue-admin/server/model/system/request"
-	"github.com/sashabaranov/go-openai"
+	"github.com/lish96/gin-vue-admin/server/global"
+	"github.com/lish96/gin-vue-admin/server/model/system"
+	"github.com/lish96/gin-vue-admin/server/model/system/request"
+	openai "github.com/sashabaranov/go-openai"
 	"gorm.io/gorm"
 )
 

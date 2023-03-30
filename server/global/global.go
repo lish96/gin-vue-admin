@@ -3,16 +3,16 @@ package global
 import (
 	"sync"
 
-	"github.com/flipped-aurora/gin-vue-admin/server/utils/timer"
+	"github.com/lish96/gin-vue-admin/server/utils/timer"
 	"github.com/songzhibin97/gkit/cache/local_cache"
 
 	"golang.org/x/sync/singleflight"
 
 	"go.uber.org/zap"
 
-	"github.com/flipped-aurora/gin-vue-admin/server/config"
+	"github.com/lish96/gin-vue-admin/server/config"
 
-	"github.com/go-redis/redis/v8"
+	redis "github.com/redis/go-redis/v9"
 	"github.com/spf13/viper"
 	"gorm.io/gorm"
 )

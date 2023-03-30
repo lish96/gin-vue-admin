@@ -3,9 +3,9 @@ package initialize
 import (
 	"context"
 
-	"github.com/flipped-aurora/gin-vue-admin/server/global"
+	"github.com/lish96/gin-vue-admin/server/global"
 
-	"github.com/go-redis/redis/v8"
+	redis "github.com/redis/go-redis/v9"
 	"go.uber.org/zap"
 )
 

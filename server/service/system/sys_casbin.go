@@ -9,9 +9,9 @@ import (
 	"github.com/casbin/casbin/v2/model"
 	gormadapter "github.com/casbin/gorm-adapter/v3"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/lish96/gin-vue-admin/server/global"
+	"github.com/lish96/gin-vue-admin/server/model/system/request"
 	"go.uber.org/zap"
-	"github.com/flipped-aurora/gin-vue-admin/server/global"
-	"github.com/flipped-aurora/gin-vue-admin/server/model/system/request"
 )
 
 //@author: [piexlmax](https://github.com/piexlmax)
@@ -100,7 +100,7 @@ func (casbinService *CasbinService) ClearCasbin(v int, p ...string) bool {
 
 var (
 	syncedCachedEnforcer *casbin.SyncedCachedEnforcer
-	once           sync.Once
+	once                 sync.Once
 )
 
 func (casbinService *CasbinService) Casbin() *casbin.SyncedCachedEnforcer {

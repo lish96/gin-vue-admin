@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	ast2 "github.com/flipped-aurora/gin-vue-admin/server/utils/ast"
 	"io"
 	"mime/multipart"
 	"os"
@@ -13,13 +12,15 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/flipped-aurora/gin-vue-admin/server/resource/autocode_template/subcontract"
+	ast2 "github.com/lish96/gin-vue-admin/server/utils/ast"
+
+	"github.com/lish96/gin-vue-admin/server/resource/autocode_template/subcontract"
 	cp "github.com/otiai10/copy"
 	"go.uber.org/zap"
 
-	"github.com/flipped-aurora/gin-vue-admin/server/global"
-	"github.com/flipped-aurora/gin-vue-admin/server/model/system"
-	"github.com/flipped-aurora/gin-vue-admin/server/utils"
+	"github.com/lish96/gin-vue-admin/server/global"
+	"github.com/lish96/gin-vue-admin/server/model/system"
+	"github.com/lish96/gin-vue-admin/server/utils"
 
 	"gorm.io/gorm"
 )
@@ -73,7 +74,7 @@ func Init(Package string) {
 		packageServiceName: {
 			path: filepath.Join(global.GVA_CONFIG.AutoCode.Root,
 				global.GVA_CONFIG.AutoCode.Server, "service", "enter.go"),
-			importCodeF:  "github.com/flipped-aurora/gin-vue-admin/server/%s/%s",
+			importCodeF:  "github.com/lish96/gin-vue-admin/server/%s/%s",
 			packageNameF: "%s",
 			groupName:    "ServiceGroup",
 			structNameF:  "%sServiceGroup",
@@ -81,7 +82,7 @@ func Init(Package string) {
 		packageRouterName: {
 			path: filepath.Join(global.GVA_CONFIG.AutoCode.Root,
 				global.GVA_CONFIG.AutoCode.Server, "router", "enter.go"),
-			importCodeF:  "github.com/flipped-aurora/gin-vue-admin/server/%s/%s",
+			importCodeF:  "github.com/lish96/gin-vue-admin/server/%s/%s",
 			packageNameF: "%s",
 			groupName:    "RouterGroup",
 			structNameF:  "%s",
@@ -89,7 +90,7 @@ func Init(Package string) {
 		packageAPIName: {
 			path: filepath.Join(global.GVA_CONFIG.AutoCode.Root,
 				global.GVA_CONFIG.AutoCode.Server, "api/v1", "enter.go"),
-			importCodeF:  "github.com/flipped-aurora/gin-vue-admin/server/%s/%s",
+			importCodeF:  "github.com/lish96/gin-vue-admin/server/%s/%s",
 			packageNameF: "%s",
 			groupName:    "ApiGroup",
 			structNameF:  "%sApiGroup",
@@ -754,7 +755,7 @@ func installation(path string, formPath string, toPath string) error {
 func filterFile(paths []string) []string {
 	np := make([]string, 0, len(paths))
 	for _, path := range paths {
-		if ok, _ := skipMacSpecialDocument(path); ok {
+		if ok, _ := skipMacSpecialDocument(nil, path, ""); ok {
 			continue
 		}
 		np = append(np, path)
@@ -762,7 +763,8 @@ func filterFile(paths []string) []string {
 	return np
 }
 
-func skipMacSpecialDocument(src string) (bool, error) {
+// srcinfo os.FileInfo, src, dest string
+func skipMacSpecialDocument(srcinfo os.FileInfo, src, dest string) (bool, error) {
 	if strings.Contains(src, ".DS_Store") || strings.Contains(src, "__MACOSX") {
 		return true, nil
 	}

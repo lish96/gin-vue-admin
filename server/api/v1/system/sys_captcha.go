@@ -3,10 +3,10 @@ package system
 import (
 	"time"
 
-	"github.com/flipped-aurora/gin-vue-admin/server/global"
-	"github.com/flipped-aurora/gin-vue-admin/server/model/common/response"
-	systemRes "github.com/flipped-aurora/gin-vue-admin/server/model/system/response"
 	"github.com/gin-gonic/gin"
+	"github.com/lish96/gin-vue-admin/server/global"
+	"github.com/lish96/gin-vue-admin/server/model/common/response"
+	systemRes "github.com/lish96/gin-vue-admin/server/model/system/response"
 	"github.com/mojocn/base64Captcha"
 	"go.uber.org/zap"
 )

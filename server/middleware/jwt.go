@@ -5,12 +5,13 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/flipped-aurora/gin-vue-admin/server/utils"
+	"github.com/golang-jwt/jwt/v4"
+	"github.com/lish96/gin-vue-admin/server/utils"
 
-	"github.com/flipped-aurora/gin-vue-admin/server/global"
-	"github.com/flipped-aurora/gin-vue-admin/server/model/common/response"
-	"github.com/flipped-aurora/gin-vue-admin/server/model/system"
-	"github.com/flipped-aurora/gin-vue-admin/server/service"
+	"github.com/lish96/gin-vue-admin/server/global"
+	"github.com/lish96/gin-vue-admin/server/model/common/response"
+	"github.com/lish96/gin-vue-admin/server/model/system"
+	"github.com/lish96/gin-vue-admin/server/service"
 
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
@@ -54,13 +55,13 @@ func JWTAuth() gin.HandlerFunc {
 		//	response.FailWithDetailed(gin.H{"reload": true}, err.Error(), c)
 		//	c.Abort()
 		//}
-		if claims.ExpiresAt-time.Now().Unix() < claims.BufferTime {
+		if claims.ExpiresAt.Unix()-time.Now().Unix() < claims.BufferTime {
 			dr, _ := utils.ParseDuration(global.GVA_CONFIG.JWT.ExpiresTime)
-			claims.ExpiresAt = time.Now().Add(dr).Unix()
+			claims.ExpiresAt = jwt.NewNumericDate(time.Now().Add(dr))
 			newToken, _ := j.CreateTokenByOldToken(token, *claims)
 			newClaims, _ := j.ParseToken(newToken)
 			c.Header("new-token", newToken)
-			c.Header("new-expires-at", strconv.FormatInt(newClaims.ExpiresAt, 10))
+			c.Header("new-expires-at", strconv.FormatInt(newClaims.ExpiresAt.Unix(), 10))
 			if global.GVA_CONFIG.System.UseMultipoint {
 				RedisJwtToken, err := jwtService.GetRedisJWT(newClaims.Username)
 				if err != nil {

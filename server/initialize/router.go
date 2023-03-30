@@ -1,15 +1,15 @@
 package initialize
 
 import (
+	swaggerFiles "github.com/swaggo/files"
 	"net/http"
 
-	"github.com/flipped-aurora/gin-vue-admin/server/docs"
-	"github.com/flipped-aurora/gin-vue-admin/server/global"
-	"github.com/flipped-aurora/gin-vue-admin/server/middleware"
-	"github.com/flipped-aurora/gin-vue-admin/server/router"
 	"github.com/gin-gonic/gin"
-	ginSwagger "github.com/swaggo/gin-swagger"
-	"github.com/swaggo/gin-swagger/swaggerFiles"
+	"github.com/lish96/gin-vue-admin/server/docs"
+	"github.com/lish96/gin-vue-admin/server/global"
+	"github.com/lish96/gin-vue-admin/server/middleware"
+	"github.com/lish96/gin-vue-admin/server/router"
+	ginSwagger "github.com/swaggo/gin-swagger" // gin-swagger middleware
 )
 
 // 初始化总路由
